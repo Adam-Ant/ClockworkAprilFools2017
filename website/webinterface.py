@@ -41,6 +41,14 @@ def index():
 def wait():
     return render_template("wait.html")
 
+
+@app.route("/pay")
+def payment():
+    if "username" in session:
+        return render_template("payment.html")
+    else:
+        return redirect(url_for("buy"))
+
 @app.route("/activate")
 def activate():
     if "username" in session:
@@ -56,9 +64,9 @@ def activate():
 def buy():
     if request.method == 'POST':
         session['username'] = request.form['username']
-        return redirect(url_for("wait"))
+        return redirect(url_for("payment"))
     return render_template("buy.html")
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0',debug=True)
 

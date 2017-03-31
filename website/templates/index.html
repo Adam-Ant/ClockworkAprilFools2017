@@ -1,4 +1,36 @@
-<html>
-  <body>
-    <h1>Welcome to this clockwork gaming debug page!</h1>
-    <a href="/activate">Click Here</a> to purchase Clockwork Plus!
+{% extends "layout.html" %}
+{% block head %}
+<style type="text/css">
+   body { background: #fff9f2 !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+
+  <h1><b>Clockwork Gaming PLUS!</b></h1>
+
+<div class="media">
+<div class="media-body">
+<h2><b> What is Clockwork Gaming Plus? </b></h2> <br>
+Clockwork Gaming Plus is a brand new premium service that allows you to get more out of Clockwork Gaming!<br>
+<p>
+<h3>Features include:</h3>
+<ul>
+  <li>Full VR Support<i>*</i></li>
+  <li>Premuim Flare!</li>
+  <li>Free Downtime!</li>
+  <li>Wideband Codec Support!</li>
+  <li>Longer Move Timeouts!</li>
+  <li> And <b> MORE</b><i>*</i></li>
+</ul>
+</p>
+
+<a class="btn btn-success btn-lg" href="/activate">Click Here to purchase Clockwork Plus! </a>
+
+</div>
+<div class="media-right"><img src="https://i.imgur.com/1vLD5FK.png" class="media-object"></div>
+</div>
+
+<h6><small>Test</small></h6>
+{% endblock %}

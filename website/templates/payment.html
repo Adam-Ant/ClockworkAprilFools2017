@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block head %}
+<style type="text/css">
+   body { background: #fff9f2 !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+   .btn { padding: 40px; margin:10px;}
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="jumbotron">
+  <h1> Select a Payment Method: </h1>
+
+  <button type="button" class="btn btn-info disabled"><h2><span class="glyphicon glyphicon-credit-card"></span><br>Card</h2></button>    
+  <button type="button" class="btn btn-info disabled"><h2><span class="glyphicon glyphicon-btc"></span><br>Bitcoin</h2></button>   
+  <button type="button" class="btn btn-info disabled"><h2><span class="glyphicon glyphicon-grain"></span><br>Magic Beans</h2></button>    
+  <button type="button" class="btn btn-info" ><h2><span class="glyphicon glyphicon-tree-deciduous"></span><br>Sunlight</h2></button>
+</div>
+</div>
+
+{% endblock %}
