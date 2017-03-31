@@ -63,7 +63,7 @@ def teamspeakClientCheck(clientName):
             return redirect(url_for("payment"))
 
 
-@app.route("/")
+@app.route("/plus/")
 def index():
     if 'username' in session:
         #No longer in the checkout flow, reset!
@@ -71,7 +71,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/collectsunlight")
+@app.route("/plus/collectsunlight")
 def wait():
     if "username" in session:
         return render_template("wait.html")
@@ -79,7 +79,7 @@ def wait():
         return redirect(url_for("buy"))
 
 
-@app.route("/pay")
+@app.route("/plus/pay")
 def payment():
     if "username" in session:
         return render_template("payment.html")
@@ -87,7 +87,7 @@ def payment():
         return redirect(url_for("buy"))
 
 
-@app.route("/activate")
+@app.route("/plus/activate")
 def activate():
     if "username" in session:
         if teamspeakClientAdd(session['username']):
@@ -100,7 +100,7 @@ def activate():
         return redirect(url_for("buy"))
 
 
-@app.route("/buy", methods=['GET', 'POST'])
+@app.route("/plus/buy", methods=['GET', 'POST'])
 def buy():
     if request.method == 'POST':
         session['username'] = request.form['username']
