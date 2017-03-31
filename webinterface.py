@@ -9,6 +9,10 @@ app = Flask(__name__)
 app.secret_key = rand(24)
 
 
+@app.route("/")
+def baseroute():
+    return redirect("/plus")
+
 def teamspeakClientAdd(clientName):
     with ts3.query.TS3Connection('magic.adam-ant.co.uk', '10011') as ts3conn:
         try:
