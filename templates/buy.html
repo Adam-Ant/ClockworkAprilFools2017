@@ -1,8 +1,29 @@
 {% extends "layout.html" %}
 
+{% block style %}
+.jumbotron { text-align: center; }
+h1.label {
+    display: inline-block;
+    margin-bottom: 0.3em;
+}
+form input, form button {
+    display: block;
+    margin: 0 auto;
+}
+.form-control {
+    width: 40%;
+    min-width: 280px;
+}
+{% endblock %}
+
 {% block body %}
-<form method="post">
-  Username: <input type="text" name="username" required>
-  <button type="submit">Get me that juicy Plus!</button>
-</form>
+<div class="container">
+  <div class="jumbotron">
+    <form method="post">
+      <h1 class="label">What's yer username?</h1>
+      <input class="username form-group form-control" type="text" name="username" required>
+      <button class="btn btn-success form-group form-control" type="submit">Get me that juicy Plus!</button>
+    </form>
+  </div>
+</div>
 {% endblock %}
