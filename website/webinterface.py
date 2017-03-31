@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 from os import urandom as rand
 import pprint
 import ts3
@@ -33,14 +33,46 @@ def teamspeakClientAdd(clientName):
         except:
             print("ERROR")
 
+def teamspeakClientCheck(clientName):
+    with ts3.query.TS3Connection('magic.adam-ant.co.uk', '10011') as ts3conn:
+        try:
+            ts3conn.login(client_login_name='serveradmin',client_login_password='DE0xWKTx')
+        except ts3.query.TS3QueryError as err:
+            print(err)
+        
+        ts3conn.use(sid=1)
+        
+        try:
+            print('before')
+            client = ts3conn.clientfind(pattern=clientName)
+            print('after')
+            clientid = client[0]['clid']
+            groups = ts3conn.clientinfo(clid=clientid)[0]['client_servergroups']
+        except ts3.query.TS3QueryError as ts3err:
+            if ts3err.resp.error['id'] == '512':
+                session.pop('username', None)
+                flash("ERROR: Username not found. Type it carefully cos Clockwork PLUS! is gonna cost ya...","danger")
+                return redirect(url_for('index'))
+            return "Ooops! Tell Adam this: <br>" + ts3err.resp.error['msg']
+        if "9," in groups:
+            print("FeckOffMate!")
+            flash("ERROR: You already have Clockwork PLUS, ya dingus","danger")
+            session.pop('username', None)
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for("payment"))
+        
+
 @app.route("/")
 def index():
     return render_template("index.html")
 
 @app.route("/collectsunlight")
 def wait():
-    return render_template("wait.html")
-
+    if "username" in session:
+        return render_template("wait.html")
+    else:
+        return redirect(url_for("buy"))
 
 @app.route("/pay")
 def payment():
@@ -53,6 +85,7 @@ def payment():
 def activate():
     if "username" in session:
         if teamspeakClientAdd(session['username']):
+            flash("Success! You have been upgraded to Clockwork PLUS! Enjoy!","success")
             return redirect(url_for('index'))
         else:
             return "Adam fucked up! go nag him"
@@ -64,7 +97,7 @@ def activate():
 def buy():
     if request.method == 'POST':
         session['username'] = request.form['username']
-        return redirect(url_for("payment"))
+        return teamspeakClientCheck(session['username'])
     return render_template("buy.html")
 
 if __name__ == '__main__':
