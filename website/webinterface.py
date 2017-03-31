@@ -65,6 +65,9 @@ def teamspeakClientCheck(clientName):
 
 @app.route("/")
 def index():
+    if 'username' in session:
+        #No longer in the checkout flow, reset!
+        session.pop('username', None)
     return render_template("index.html")
 
 @app.route("/collectsunlight")
