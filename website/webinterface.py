@@ -85,6 +85,7 @@ def payment():
 def activate():
     if "username" in session:
         if teamspeakClientAdd(session['username']):
+            session.pop('username', None)
             flash("Success! You have been upgraded to Clockwork PLUS! Enjoy!","success")
             return redirect(url_for('index'))
         else:
