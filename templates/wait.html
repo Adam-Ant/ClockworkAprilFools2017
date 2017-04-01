@@ -9,14 +9,27 @@ body {
   background-repeat: repeat;
   }
 
+* {
+  text-align: center;
+  color: white;
+  text-shadow: 0px 3px 4px #000;
+}
 #container{
    width: 300px;
    margin: 0 auto;
-   top: 55%;
- }
+   top: 45%;
+}
+#progress-title {
+  position: relative;
+  font-size: larger;
+  top: 25%
+}
 </style>
 
   
+  <div id="progress-title">
+    <h1>Collecting sunlight, please wait...</h1>
+  </div>
   <div id="container" class="container"></div>
 
 
@@ -37,7 +50,7 @@ body {
 var bar = new ProgressBar.SemiCircle(container, {
   strokeWidth: 30,
   color: '#FBDB0C',
-  trailColor: '#000000',
+  trailColor: 'white',
   trailWidth: 2,
   easing: 'easeInOut',
   duration: 30000,
@@ -62,7 +75,7 @@ var bar = new ProgressBar.SemiCircle(container, {
   }
 });
 bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-bar.text.style.fontSize = '2rem';
+bar.text.style.fontSize = '2.5rem';
 
 bar.animate(1.0);  // Number from 0.0 to 1.0
 
